@@ -4,5 +4,6 @@ branches:
 - master
 projects:
   SqlConfig:
-    path: ""
+    model: virion
+    type: library
 ...
