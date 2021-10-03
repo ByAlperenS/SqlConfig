@@ -7,7 +7,7 @@
 ```php
 public function onEnable(){
     $this->sqlconfig = SqlConfig::createDatabase($this->getDataFolder(), "example.db");
-    SqlConfig::getInstance()->createTable($this->sqlconfig, "Example", [
+    SqlConfig::createTable($this->sqlconfig, "Example", [
       "name" => "string",
       "surname" => "string",
       "age" => "int"
