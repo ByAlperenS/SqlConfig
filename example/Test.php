@@ -13,8 +13,8 @@ class Test extends PluginBase{
     private $sqlconfig;
 
     public function onEnable(){
-        $this->sqlconfig = SqlConfig::getInstance()->createDatabase($this->getDataFolder(), "test.db");
-        SqlConfig::getInstance()->createTable($this->sqlconfig, "Test", [
+        $this->sqlconfig = SqlConfig::createDatabase($this->getDataFolder(), "test.db");
+        SqlConfig::createTable($this->sqlconfig, "Test", [
             "name" => "string",
             "surname" => "string",
             "age" => "int"
@@ -26,31 +26,33 @@ class Test extends PluginBase{
             if ($sender instanceof Player){
                 if (isset($args[0])){
                     if ($args[0] == "insert"){
-                        SqlConfig::getInstance()->insertToTable($this->sqlconfig, "Test", [
+                        SqlConfig::insertToTable($this->sqlconfig, "Test", [
                             "name" => "Alperen",
                             "surname" => "Sancak",
                             "age" => 15
                         ]);
                     }
                     if ($args[0] == "delete"){
-                        SqlConfig::getInstance()->removeFromTable($this->sqlconfig, "Test", [
+                        SqlConfig::removeFromTable($this->sqlconfig, "Test", [
                             "name" => "Alperen",
                             "surname" => "Sancak"
                         ]);
                     }
                     if ($args[0] == "select"){
-                        $result = SqlConfig::getInstance()->selectTable($this->sqlconfig, "Test", [
+                        $result = SqlConfig::selectTable($this->sqlconfig, "Test", [
                             "name",
                             "surname"
+                        ], [
+                            "name" => "Alperen"
                         ]);
                         var_dump($result);
                     }
                     if ($args[0] == "selectall"){
-                        $result = SqlConfig::getInstance()->selectAllTable($this->sqlconfig, "Test");
+                        $result = SqlConfig::selectAllTable($this->sqlconfig, "Test");
                         var_dump($result);
                     }
                     if ($args[0] == "update"){
-                        SqlConfig::getInstance()->updateTable($this->sqlconfig, "Test", [
+                        SqlConfig::updateTable($this->sqlconfig, "Test", [
                             "name" => "Ahmet Eren",
                             "surname" => "Sancak"
                         ], [
@@ -59,7 +61,7 @@ class Test extends PluginBase{
                         ]);
                     }
                     if ($args[0] == "list"){
-                        $result = SqlConfig::getInstance()->getTableDataList($this->sqlconfig, "Test");
+                        $result = SqlConfig::getTableDataList($this->sqlconfig, "Test");
                         var_dump($result);
                     }
                 }
