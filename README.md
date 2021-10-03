@@ -139,4 +139,4 @@ array(1) {
   }
 }
 ```
--> [Example Plugin Class](https://github.com/ByAlperenS/SqlConfig/example/Test.php).
+-> [Example Plugin Class](https://github.com/ByAlperenS/SqlConfig/blob/master/example/Test.php).
