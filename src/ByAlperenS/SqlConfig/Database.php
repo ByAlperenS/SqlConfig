@@ -72,7 +72,7 @@ class Database{
             foreach ($columns as $column => $value){
                 $tableColumn[] = $column;
                 $tableColumnValues[] = ":" . $column;
-                $values[":" . $column] = "$value";
+                $values[":" . $column] = $value;
             }
         }
         $data = $this->database->prepare("INSERT INTO " . $tableName . "(" . implode(", ", $tableColumn) . ") VALUES(" . implode(", ", $tableColumnValues) . ")");
@@ -100,7 +100,7 @@ class Database{
         if (!empty($columns)){
             foreach ($columns as $column => $value){
                 $tableColumn[] = $column . "=:" . $column;
-                $values[":" . $column] = $value;
+                $values[":" . $column] = "'" . "${value}" . "'";
             }
         }
         $data = $this->database->prepare("DELETE FROM " . $tableName . " WHERE " . implode(" AND ", $tableColumn));
@@ -125,24 +125,25 @@ class Database{
     public function selectTable(string $tableName, array $columns, array $where): array{
         $tableWhereColumn = [];
         $tableColumn = [];
-        $next = "";
-        $column = "*";
+        $next = null;
+        $column_sql = "*";
 
         if (!empty($columns)){
             foreach ($columns as $column){
                 $tableColumn[] = $column;
             }
-            $column = implode(", ", $tableColumn);
+            $column_sql = implode(", ", $tableColumn);
         }
         if (!empty($where)){
             $next = " WHERE ";
 
             foreach ($where as $column => $value){
-                $tableWhereColumn[] = $column . "=" . $value;
+                $tableWhereColumn[] = $column . "='" . "${value}" . "'";
             }
             $next .= implode(" AND ", $tableWhereColumn);
         }
-        $data = $this->database->query("SELECT " . $column . " FROM " . $tableName . $next);
+        $sql = "SELECT " . $column_sql . " FROM " . $tableName . $next;
+        $data = $this->database->query($sql);
         $info = [];
 
         while ($row = $data->fetchArray()){
