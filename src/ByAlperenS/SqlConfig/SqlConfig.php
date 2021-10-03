@@ -2,40 +2,25 @@
 
 namespace ByAlperenS\SqlConfig;
 
-use pocketmine\plugin\PluginBase;
+class SqlConfig{
 
-class SqlConfig extends PluginBase{
-
-    private $database;
-
-    private static $instance;
-
-    public function onLoad(){
-        self::$instance = $this;
-    }
-
-    /**
-     * @return SqlConfig
-     */
-    public static function getInstance(): SqlConfig{
-        return self::$instance;
-    }
+    private static $database;
 
     /**
      * @param string $dataFolder
      * @param string $fileName
      * @return Database
      */
-    public function createDatabase(string $dataFolder, string $fileName): Database{
-        $this->database = new Database($dataFolder, $fileName);
-        return $this->database;
+    public static function createDatabase(string $dataFolder, string $fileName): Database{
+        self::$database = new Database($dataFolder, $fileName);
+        return self::$database;
     }
 
     /**
      * @return Database
      */
-    public function getDatabase(): Database{
-        return $this->database;
+    public static function getDatabase(): Database{
+        return self::$database;
     }
 
     /**
@@ -44,7 +29,7 @@ class SqlConfig extends PluginBase{
      * @param array $columns
      * @return bool
      */
-    public function createTable(Database $database, string $tableName, array $columns = []): bool{
+    public static function createTable(Database $database, string $tableName, array $columns = []): bool{
         $result = $database->createTable($tableName, $columns);
 
         if ($result == false){
@@ -59,7 +44,7 @@ class SqlConfig extends PluginBase{
      * @param array $columns
      * @return bool
      */
-    public function insertToTable(Database $database, string $tableName, array $columns = []): bool{
+    public static function insertToTable(Database $database, string $tableName, array $columns = []): bool{
         $result = $database->insertToTable($tableName, $columns);
 
         if ($result == false){
@@ -74,7 +59,7 @@ class SqlConfig extends PluginBase{
      * @param array $columns
      * @return bool
      */
-    public function removeFromTable(Database $database, string $tableName, array $columns = []): bool{
+    public static function removeFromTable(Database $database, string $tableName, array $columns = []): bool{
         $result = $database->removeFromTable($tableName, $columns);
 
         if ($result == false){
@@ -90,7 +75,7 @@ class SqlConfig extends PluginBase{
      * @param array $where
      * @return false|array
      */
-    public function selectTable(Database $database, string $tableName, array $columns = [], array $where = []){
+    public static function selectTable(Database $database, string $tableName, array $columns = [], array $where = []){
         $result = $database->selectTable($tableName, $columns, $where);
 
         if ($result == false){
@@ -104,7 +89,7 @@ class SqlConfig extends PluginBase{
      * @param string $tableName
      * @return false|array
      */
-    public function selectAllTable(Database $database, string $tableName){
+    public static function selectAllTable(Database $database, string $tableName){
         $result = $database->selectAllTable($tableName);
 
         if ($result == false){
@@ -120,7 +105,7 @@ class SqlConfig extends PluginBase{
      * @param array $where
      * @return bool
      */
-    public function updateTable(Database $database, string $tableName, array $columns = [], array $where = []): bool{
+    public static function updateTable(Database $database, string $tableName, array $columns = [], array $where = []): bool{
         $result = $database->updateTable($tableName, $columns, $where);
 
         if ($result == false){
@@ -134,7 +119,7 @@ class SqlConfig extends PluginBase{
      * @param string $tableName
      * @return array
      */
-    public function getTableDataList(Database $database, string $tableName): array{
+    public static function getTableDataList(Database $database, string $tableName): array{
         return $database->getTableDataList($tableName);
     }
 }
