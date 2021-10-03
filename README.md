@@ -6,7 +6,7 @@
 #### Create Table:
 ```php
 public function onEnable(){
-    $this->sqlconfig = SqlConfig::getInstance()->createDatabase($this->getDataFolder(), "example.db");
+    $this->sqlconfig = SqlConfig::createDatabase($this->getDataFolder(), "example.db");
     SqlConfig::getInstance()->createTable($this->sqlconfig, "Example", [
       "name" => "string",
       "surname" => "string",
@@ -17,7 +17,7 @@ public function onEnable(){
 #
 #### Insert:
 ```php
-SqlConfig::getInstance()->insertToTable($this->sqlconfig, "Example", [
+SqlConfig::insertToTable($this->sqlconfig, "Example", [
     "name" => "Alperen",
     "surname" => "Sancak",
     "age" => 15
@@ -26,7 +26,7 @@ SqlConfig::getInstance()->insertToTable($this->sqlconfig, "Example", [
 #
 #### Delete:
 ```php
-SqlConfig::getInstance()->removeFromTable($this->sqlconfig, "Example", [
+SqlConfig::removeFromTable($this->sqlconfig, "Example", [
     "name" => "Alperen",
     "surname" => "Sancak"
 ]);
@@ -34,7 +34,7 @@ SqlConfig::getInstance()->removeFromTable($this->sqlconfig, "Example", [
 #
 #### Select:
 ```php
-$result = SqlConfig::getInstance()->selectTable($this->sqlconfig, "Example", [
+$result = SqlConfig::selectTable($this->sqlconfig, "Example", [
     "name",
     "surname"
 ], [
@@ -61,7 +61,7 @@ array(1) {
 #
 #### Select All:
 ```php
-$result = SqlConfig::getInstance()->selectAllTable($this->sqlconfig, "Example");
+$result = SqlConfig::selectAllTable($this->sqlconfig, "Example");
 var_dump($result);
 ```
 ##### Result:
@@ -102,7 +102,7 @@ array(2) {
 #
 #### Update:
 ```php
-SqlConfig::getInstance()->updateTable($this->sqlconfig, "Example", [
+SqlConfig::updateTable($this->sqlconfig, "Example", [
     "name" => "Ahmet Eren",
     "surname" => "Sancak"
 ], [
@@ -113,7 +113,7 @@ SqlConfig::getInstance()->updateTable($this->sqlconfig, "Example", [
 #
 #### Table Data List:
 ```php
-$result = SqlConfig::getInstance()->getTableDataList($this->sqlconfig, "Example");
+$result = SqlConfig::getTableDataList($this->sqlconfig, "Example");
 var_dump($result);
 ```
 ##### Result:
