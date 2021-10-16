@@ -5,14 +5,12 @@
 ## API:
 #### Create Table:
 ```php
-public function onEnable(){
-    $this->sqlconfig = SqlConfig::createDatabase($this->getDataFolder(), "example.db");
-    SqlConfig::createTable($this->sqlconfig, "Example", [
-      "name" => "string",
-      "surname" => "string",
-      "age" => "int"
-    ]);
-}
+$this->sqlconfig = SqlConfig::createDatabase($this->getDataFolder(), "example.db");
+SqlConfig::createTable($this->sqlconfig, "Example", [
+    "name" => "string",
+    "surname" => "string",
+    "age" => "int"
+]);
 ```
 #
 #### Insert:
